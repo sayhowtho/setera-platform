@@ -1,0 +1,62 @@
+/* Mobile first: stages stack, the connecting line runs down their left
+   edges. Desktop: three columns, the line runs across their top edges.
+   Only transform/opacity animate; the line and nodes are absolutely
+   positioned, so nothing here affects layout (no CLS). */
+.flow {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  margin-top: 40px;
+  padding-left: 18px;
+}
+.stage { position: relative; }
+.lineH, .lineV {
+  position: absolute;
+  background: var(--accent);
+  z-index: 2;
+  pointer-events: none;
+}
+.lineH { display: none; }
+.lineV {
+  left: 17px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform-origin: top center;
+}
+.node {
+  position: absolute;
+  left: -18px;
+  top: 20px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.flow .stage { padding-left: 32px; }
+.kind { margin: -2px 0 10px; font-size: 13px; font-weight: 600; color: var(--accent); }
+.stageLink { margin-top: 16px; }
+
+@media (min-width: 960px) {
+  .flow { grid-template-columns: repeat(3, 1fr); padding-left: 0; padding-top: 18px; }
+  .lineV { display: none; }
+  .lineH {
+    display: block;
+    top: 17px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    transform-origin: left center;
+  }
+  .flow .stage { padding-left: 24px; padding-top: 32px; }
+  .node { left: 20px; top: -18px; }
+}

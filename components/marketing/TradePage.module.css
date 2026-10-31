@@ -1,0 +1,17 @@
+.urgentCard { border-color: color-mix(in oklab, var(--urgent) 35%, var(--border)); }
+.urgentIcon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  background: var(--urgent-bg);
+  color: var(--urgent);
+  margin-bottom: 14px;
+}
+.calcLink { margin-top: 20px; }
+.otherTrades { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); }
+.otherTrades ul { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.emergencyNote { margin-bottom: 16px; }
+.safety { margin-top: 16px; font-weight: 600; color: var(--ink); }

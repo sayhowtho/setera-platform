@@ -1,0 +1,57 @@
+/* Homepage-only layout pieces. Shared primitives live in
+   components/marketing/sections.module.css; hero styles in home.module.css. */
+
+.leakLayout { display: grid; gap: 16px; margin-top: 32px; align-items: stretch; }
+@media (min-width: 960px) {
+  .leakLayout { grid-template-columns: 1fr 360px; }
+}
+.leakPhoto, .photoFrame {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 3 / 2;
+}
+@media (min-width: 960px) {
+  .leakPhoto { aspect-ratio: auto; min-height: 100%; }
+}
+.photo { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.example { margin-top: 24px; }
+.exampleLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.exampleIntro { color: var(--ink); margin: 0 0 14px; }
+.exampleRows { display: grid; gap: 8px; margin-bottom: 14px; }
+.exampleRows p { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.5; }
+.exampleRows span {
+  display: inline-block;
+  min-width: 150px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-right: 6px;
+}
+.exampleRows strong { color: var(--accent-strong); }
+
+.seoNote { margin-top: 16px; }
+
+.emilyLine { margin-top: 12px; color: var(--ink); }
+.alsoServe { margin-top: 20px; }
+
+.calcIntro { max-width: 680px; margin: 0 auto 32px; text-align: center; }
+.calcIntro > * { margin-left: auto; margin-right: auto; }
+.calcMore { text-align: center; margin-top: 20px; }
+
+.close { text-align: center; }
+.closeActions { justify-content: center; }
+
+.tradeLink { margin-top: 14px; }

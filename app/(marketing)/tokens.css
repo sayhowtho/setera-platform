@@ -1,0 +1,86 @@
+/* Shared marketing-site tokens: palette A (chosen 2026-10-08).
+   Rule: bright teal only on dark surfaces; deep emerald on light ones.
+   Contrast (WCAG) checked for every text/background pair below:
+     dark  ink 16.8 · muted 8.0 · teal 9.9+ · btn ink on teal 10+
+     light ink 17.4 · muted 6.8 (7.3 on cards) · emerald 5.1 · white on emerald 5.5
+   Sections opt into a surface with data-surface="dark|light"; the nav
+   reads the same attribute to switch its own light/dark styling. */
+
+:root {
+  --dark-bg: #080a0f;
+  --dark-surface: #0e1117;
+  --dark-raised: #141a23;
+  --dark-ink: #e8edf5;
+  --dark-muted: #a0aab8;
+  --dark-border: rgba(255, 255, 255, 0.08);
+  --teal: #2dd4bf;
+  --teal-hover: #22b8a5;
+  --teal-ink: #06110d;
+
+  --light-bg: #f6f8f7;
+  --light-surface: #ffffff;
+  --light-ink: #0b1512;
+  --light-muted: #4a5a55;
+  --light-border: #dde5e1;
+  --light-tint: #e7f3ee;
+  --emerald: #047857;
+  --emerald-strong: #065f46;
+
+  --urgent: #c2410c;
+  --urgent-bg: #fff1e8;
+
+  --radius: 16px;
+  --gutter: 16px;
+  --max: 1120px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 600px) {
+  :root { --gutter: 32px; }
+}
+
+[data-surface='dark'] {
+  --bg: var(--dark-bg);
+  --surface: var(--dark-surface);
+  --raised: var(--dark-raised);
+  --ink: var(--dark-ink);
+  --muted: var(--dark-muted);
+  --border: var(--dark-border);
+  --accent: var(--teal);
+  --accent-strong: var(--teal);
+  --btn-bg: var(--teal);
+  --btn-bg-hover: var(--teal-hover);
+  --btn-ink: var(--teal-ink);
+  --tint: rgba(45, 212, 191, 0.1);
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+[data-surface='light'] {
+  --bg: var(--light-bg);
+  --surface: var(--light-surface);
+  --raised: var(--light-surface);
+  --ink: var(--light-ink);
+  --muted: var(--light-muted);
+  --border: var(--light-border);
+  --accent: var(--emerald);
+  --accent-strong: var(--emerald-strong);
+  --btn-bg: var(--emerald);
+  --btn-bg-hover: var(--emerald-strong);
+  --btn-ink: #ffffff;
+  --tint: var(--light-tint);
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+/* A white card band inside a light page. */
+[data-surface='light'][data-tone='white'] {
+  --bg: var(--light-surface);
+  --surface: var(--light-bg);
+}
+
+/* A slightly lifted dark band, to separate two dark sections in a row. */
+[data-surface='dark'][data-tone='raised'] {
+  --bg: var(--dark-surface);
+  --surface: var(--dark-raised);
+}

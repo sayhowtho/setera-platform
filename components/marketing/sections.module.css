@@ -1,0 +1,225 @@
+/* Section primitives shared by every marketing page. Colors come only from
+   the surface tokens in app/(marketing)/tokens.css (--ink, --muted,
+   --accent, --btn-bg, ...), so the same markup works on dark and light. */
+
+.section {
+  padding: clamp(64px, 9vw, 104px) var(--gutter);
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
+}
+.sectionTight { padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(40px, 6vw, 64px); }
+.inner { max-width: var(--max); margin: 0 auto; }
+.narrow { max-width: 760px; margin: 0 auto; }
+
+.pageTop { padding-top: clamp(120px, 14vw, 160px); }
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+.h1, .h2 {
+  font-family: 'Bebas Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.06;
+  color: var(--ink);
+  margin: 0 0 20px;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+.h1 { font-size: clamp(34px, 6vw, 60px); }
+.h2 { font-size: clamp(28px, 4.6vw, 48px); }
+.h3 { font-size: 19px; font-weight: 700; line-height: 1.3; color: var(--ink); margin: 0 0 8px; }
+.lede { font-size: clamp(17px, 2vw, 20px); line-height: 1.6; color: var(--ink); max-width: 680px; margin: 0 0 18px; }
+.body { font-size: 16px; line-height: 1.7; color: var(--muted); max-width: 680px; margin: 0 0 16px; }
+.body:last-child { margin-bottom: 0; }
+.body strong { color: var(--ink); font-weight: 600; }
+.small { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin-top: 28px; }
+.btn, .btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.btn { background: var(--btn-bg); color: var(--btn-ink); border: 0; }
+.btn:hover { background: var(--btn-bg-hover); }
+.btnGhost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btnGhost:hover { background: var(--tint); }
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  /* also used on <button> (Talk to Emily): reset native button chrome */
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.btn:focus-visible, .btnGhost:focus-visible, .link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.grid2, .grid3, .grid4 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 720px) {
+  .grid2 { grid-template-columns: 1fr 1fr; }
+  .grid4 { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 960px) {
+  .grid3 { grid-template-columns: repeat(3, 1fr); }
+  .grid4 { grid-template-columns: repeat(4, 1fr); }
+}
+.split { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+@media (min-width: 960px) {
+  .split { grid-template-columns: 1fr 1.1fr; gap: 64px; }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.cardIcon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  background: var(--tint);
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.list li { position: relative; padding-left: 26px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.45em;
+  width: 12px;
+  height: 7px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--accent);
+}
+
+.note {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+
+/* Dark → light hand-off. A neutral oklab blend sampled along a smoothstep
+   curve (slow start, slow finish), over a tall band, so there's no visible
+   edge where the dark section ends and no tinted midpoint. Static: no
+   motion, nothing to load, no layout shift. */
+.toLight {
+  height: clamp(140px, 20vw, 260px);
+  margin-bottom: -1px; /* no sub-pixel seam against the light section */
+  background: linear-gradient(
+    180deg,
+    var(--dark-bg) 0%,
+    color-mix(in oklab, var(--dark-bg) 97.2%, var(--light-bg)) 10%,
+    color-mix(in oklab, var(--dark-bg) 89.6%, var(--light-bg)) 20%,
+    color-mix(in oklab, var(--dark-bg) 78.4%, var(--light-bg)) 30%,
+    color-mix(in oklab, var(--dark-bg) 64.8%, var(--light-bg)) 40%,
+    color-mix(in oklab, var(--dark-bg) 50.0%, var(--light-bg)) 50%,
+    color-mix(in oklab, var(--dark-bg) 35.2%, var(--light-bg)) 60%,
+    color-mix(in oklab, var(--dark-bg) 21.6%, var(--light-bg)) 70%,
+    color-mix(in oklab, var(--dark-bg) 10.4%, var(--light-bg)) 80%,
+    color-mix(in oklab, var(--dark-bg) 2.8%, var(--light-bg)) 90%,
+    var(--light-bg) 100%
+  );
+}
+
+/* FAQ */
+.faq { display: grid; gap: 10px; margin-top: 28px; }
+.faq details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 20px;
+}
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 28px 18px 0;
+  font-weight: 650;
+  color: var(--ink);
+  position: relative;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-size: 22px;
+  font-weight: 500;
+}
+.faq details[open] summary::after { content: '–'; }
+.faq details p { margin: 0 0 18px; color: var(--muted); line-height: 1.7; }
+
+.eyebrow svg { vertical-align: -2px; margin-right: 4px; }
+
+.tradeLinks { margin-top: 28px; }
+
+/* Subtle sitewide scroll-reveal for section headings and cards.
+   CSS scroll-driven animation: no JavaScript, so it can't fail into a
+   hidden state. Browsers without animation-timeline support simply show
+   everything; prefers-reduced-motion shows the finished state. Elements
+   already on screen at load are past the range, so they render finished.
+   Only opacity + transform animate (no layout shift). Cards that
+   framer-motion animates carry data-motion and are skipped. */
+@keyframes sectionRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .h2,
+    .card:not([data-motion]) {
+      animation: sectionRise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}

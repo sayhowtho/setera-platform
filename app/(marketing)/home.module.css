@@ -1,0 +1,462 @@
+.root {
+  background: #080a0f;
+  color: #e8edf5;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh; /* fallback for browsers without dvh support */
+  min-height: 100dvh; /* accounts for iOS Safari's dynamic address bar */
+}
+
+/* ── ACT 1 — Hero ──
+   Rebuilt from scratch, mobile-first. Every piece of copy is real
+   HTML/CSS (no text baked into the background image), and the section
+   is styled base-up for mobile, with progressively richer layout added
+   at wider min-width breakpoints — rather than a desktop-first design
+   patched down for mobile after the fact.
+
+   Constraints baked in from the start, not bolted on after the fact:
+   - No position: fixed/sticky anywhere in this section.
+   - Every real content element (.heroContent and everything in it) is
+     normal document flow — only the decorative background image and
+     overlay layers use position: absolute, which is safe since they're
+     inset:0 on a position:relative parent and can't clip real content.
+   - No scroll-triggered or transform+opacity animation on this section
+     at all — it's above the fold already, so it just renders immediately.
+   - min-height uses the vh-then-dvh fallback pattern for iOS Safari's
+     dynamic toolbar, and is only applied at the desktop tier — mobile
+     and tablet size to their own content instead of forcing a height. */
+
+.heroSection {
+  position: relative;
+  overflow: hidden;
+  background: #06080c;
+  padding: 96px 24px 40px; /* fallback for browsers without env() support */
+  padding-left: calc(24px + env(safe-area-inset-left));
+  padding-right: calc(24px + env(safe-area-inset-right));
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* The photo is a next/image (fill + priority, served as AVIF/WebP) inside
+   .heroBg, cropped exactly like the old background-size: cover. */
+.heroBgImg {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Fades only the photo's bottom edge into the page's dark base so the hero
+   hands off cleanly to the next section. Lives in the background layer
+   (z-index 0), under the cards (1) and content (2), so nothing readable
+   is dimmed. */
+.heroBg::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  background: linear-gradient(180deg, rgba(8, 10, 15, 0) 0%, #080a0f 100%);
+}
+
+/* Mobile/tablet base: full-coverage darkening wash, since content spans
+   the full width and sits as an overlay on top of the image at these
+   sizes. Swapped for a left-side-only gradient at desktop width, below. */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(6,8,12,0.72) 0%, rgba(6,8,12,0.86) 55%, rgba(6,8,12,0.94) 100%);
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+/* Brand logo in place of the old text wordmark. Width-driven with
+   height:auto so it keeps its 2588:316 aspect at every size and can never
+   be cropped or stretched; max-width keeps it inside the content column
+   on the narrowest phones. */
+.heroLogo {
+  display: block;
+  width: clamp(220px, 62vw, 520px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* The page's real H1: the keyword line, under the logo. */
+.heroH1 {
+  font-size: clamp(17px, 2.2vw, 20px);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #e8edf5;
+  margin: 0 0 10px;
+}
+
+.heroUnderline {
+  width: 110px;
+  height: 3px;
+  border-radius: 2px;
+  background: #2dd4bf;
+  box-shadow: 0 0 16px 2px rgba(45,212,191,0.5), 0 0 30px 6px rgba(45,212,191,0.22);
+  margin: 16px 0 18px;
+}
+
+.heroTagline {
+  font-size: clamp(12px, 1.6vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #2dd4bf;
+  margin: 0 0 8px;
+}
+
+/* "If you miss a call, we fix that." directly under Nothing Slips. */
+.heroMissLine {
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 600;
+  line-height: 1.4;
+  color: #e8edf5;
+  margin: 0 0 20px;
+}
+
+.heroSubhead {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(19px, 2.6vw, 24px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+  margin: 0 0 18px;
+}
+
+.heroBody {
+  font-size: clamp(15px, 1.8vw, 16px);
+  line-height: 1.7;
+  color: #c7d0da;
+  margin: 0 0 30px;
+}
+
+.heroChecklist {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.heroChecklistItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.heroChecklistIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(45,212,191,0.6);
+  background: rgba(45,212,191,0.06);
+  color: #2dd4bf;
+}
+
+.heroChecklistText {
+  color: #fff;
+  font-size: clamp(14px, 1.6vw, 15px);
+  font-weight: 500;
+}
+
+/* Mobile base: full-width stacked buttons, no absolute positioning. */
+.heroButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.heroBtnPrimary,
+.heroBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.heroBtnPrimary {
+  background: #2dd4bf;
+  color: #06110d;
+  border: none;
+}
+
+.heroBtnPrimary:hover {
+  background: #22b8a5;
+}
+
+.heroBtnSecondary {
+  background: transparent;
+  color: #2dd4bf;
+  border: 1.5px solid #2dd4bf;
+}
+
+.heroBtnSecondary:hover {
+  background: rgba(45,212,191,0.1);
+}
+
+/* ── Tablet (600px+): buttons move side by side; text scaling from here
+   up is already handled by the clamp() values above. ── */
+@media (min-width: 600px) {
+  .heroSection {
+    padding: 100px 40px 56px; /* fallback for browsers without env() support */
+    padding-left: calc(40px + env(safe-area-inset-left));
+    padding-right: calc(40px + env(safe-area-inset-right));
+  }
+  .heroButtons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .heroBtnPrimary,
+  .heroBtnSecondary {
+    width: auto;
+  }
+}
+
+/* ── Hero floating connector cards ──
+   Purely decorative, so hidden below 900px where there's no distinct
+   "right side of the photo" for them to float over (content is
+   full-width there). Entrance (staggered fade+slide-in) and the
+   continuous idle float loop are both plain CSS @keyframes — no Framer
+   Motion, no React state, no JS dependency of any kind. The hero is
+   above the fold and always needs to render immediately regardless of
+   hydration timing, so this sidesteps the whole class of "stuck
+   invisible" bug (content that waits on JS to appear and never does when
+   hydration fails) rather than needing to re-solve it: a CSS
+   animation runs on the browser's own timeline and can't get stuck
+   waiting on JS that failed to load. Each card's --stagger custom
+   property (set inline per card) delays both the entrance and the
+   float loop's start, so the loop picks up right where the entrance
+   settles instead of all five cards floating in lockstep.
+
+   IMPORTANT: this base rule (display: none) must stay ABOVE the
+   `@media (min-width: 900px)` block below, which overrides it to
+   `display: block`. Both rules have identical specificity (one class
+   selector each), so with equal specificity the LATER rule in the file
+   always wins regardless of which one is inside a media query — if this
+   block were moved below that one, the cards would be display: none at
+   every viewport width, including desktop. (This is exactly the bug
+   that shipped once already; don't reintroduce it.) */
+
+.heroCardsLayer {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroCard {
+  --stagger: 0ms;
+  position: absolute;
+  width: 210px;
+  background: rgba(8,10,15,0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  opacity: 0;
+  animation:
+    heroCardEnter 0.7s ease-out var(--stagger) forwards,
+    heroCardFloat 5s ease-in-out calc(0.7s + var(--stagger)) infinite;
+}
+
+.heroCardTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.heroCardSub {
+  font-size: 12px;
+  font-weight: 500;
+  color: #2dd4bf;
+}
+
+@keyframes heroCardEnter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroCardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCard {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ── Desktop (900px+): full viewport height, left-side-only gradient so
+   the right side of the cityscape stays visible, generous side padding
+   for the roughly-45-50%-of-viewport content column. ── */
+@media (min-width: 900px) {
+  .heroSection {
+    /* Capped so tall screens don't leave a band of empty dark space
+       under the buttons before the next section. */
+    min-height: min(100vh, 780px); /* fallback for browsers without dvh support */
+    min-height: min(100dvh, 780px);
+    display: flex;
+    align-items: center;
+    padding: 104px 64px 56px; /* fallback for browsers without env() support */
+    padding-left: calc(64px + env(safe-area-inset-left));
+    padding-right: calc(64px + env(safe-area-inset-right));
+  }
+  .heroOverlay {
+    background: linear-gradient(90deg, rgba(6,8,12,0.92) 0%, rgba(6,8,12,0.78) 35%, rgba(6,8,12,0.4) 58%, transparent 78%);
+  }
+  .heroCardsLayer {
+    display: block;
+  }
+}
+
+.section {
+  padding: 100px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #00c9a7;
+  margin-bottom: 16px;
+}
+
+.h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  letter-spacing: 0.03em;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #00c9a7;
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 16px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.heroCta:hover{ background: #009e84; }
+
+/* ── Demo request form ── */
+
+.demoIntro {
+  font-size: 16px;
+  color: #a0aab8;
+  line-height: 1.7;
+  margin: 24px 0 40px;
+}
+
+.demoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.demoField {
+  display: flex;
+  flex-direction: column;
+}
+
+.demoLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a0aab8;
+  margin-bottom: 10px;
+}
+
+.demoInput,
+.demoSelect,
+.demoTextarea {
+  width: 100%;
+  background: #151a22;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: #fff;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.demoInput:focus,
+.demoSelect:focus,
+.demoTextarea:focus {
+  border-color: #00c9a7;
+}
+
+.demoSelect{ cursor: pointer; }
+.demoTextarea{ resize: vertical; }
+
+.demoError {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin: 0;
+}
+
+.demoConfirm {
+  margin-top: 32px;
+  padding: 40px 32px;
+  background: rgba(0,201,167,0.06);
+  border: 1px solid rgba(0,201,167,0.2);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.demoConfirm p {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 600;
+  margin: 0;
+}

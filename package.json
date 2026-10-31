@@ -1,0 +1,33 @@
+{
+  "name": "setera",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "node --no-warnings --experimental-loader ./scripts/ts-relative-loader.mjs --test lib/business-normalize.test.ts lib/canada-places.test.ts lib/rep-activity.test.ts lib/compensation.test.ts lib/first-payment.test.ts lib/client-tier.test.ts lib/client-edit.test.ts lib/client-revenue.test.ts lib/client-payments.test.ts lib/slots.test.ts lib/callOutcomes.test.ts lib/local-date.test.ts lib/followups.test.ts lib/prospect-search.test.ts lib/stage-change.test.ts lib/trade-options.test.ts lib/api-route-guards.test.ts lib/user-admin.test.ts lib/webhook-idempotency.test.ts lib/emily-signature.test.ts lib/emily-webhook-rollout.test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.124.0",
+    "@supabase/supabase-js": "^2.105.4",
+    "@vercel/analytics": "^2.0.1",
+    "framer-motion": "^12.42.2",
+    "googleapis": "^173.0.0",
+    "lucide-react": "^1.24.0",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

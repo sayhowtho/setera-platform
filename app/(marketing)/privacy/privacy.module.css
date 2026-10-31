@@ -1,0 +1,242 @@
+.root {
+  background: #080a0f;
+  color: #e8edf5;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 130px 24px 100px;
+}
+
+.pageTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 6vw, 64px);
+  letter-spacing: 0.03em;
+  color: #fff;
+  line-height: 1;
+  margin: 0 0 28px;
+}
+
+.lead {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #a0aab8;
+  margin: 0 0 40px;
+}
+
+/* ── Table of contents ── */
+
+.toc {
+  background: #0e1117;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin: 0 0 64px;
+}
+
+.tocLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #00c9a7;
+  margin-bottom: 16px;
+}
+
+.tocList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+}
+
+.tocList li {
+  counter-increment: toc;
+}
+
+.tocLink {
+  display: block;
+  font-size: 14px;
+  color: #c7d0da;
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color 0.2s;
+}
+
+.tocLink::before {
+  content: counter(toc) '. ';
+  color: #00c9a7;
+  font-weight: 600;
+}
+
+.tocLink:hover {
+  color: #00c9a7;
+}
+
+/* ── Sections ── */
+
+.section {
+  margin-bottom: 56px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.section:first-of-type {
+  padding-top: 0;
+  border-top: none;
+}
+
+.sectionHeading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0 0 20px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.sectionHeading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 3px;
+  border-radius: 2px;
+  background: #00c9a7;
+}
+
+.subheading {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a0aab8;
+  margin: 24px 0 12px;
+}
+
+.subheading:first-of-type {
+  margin-top: 0;
+}
+
+.body {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #c7d0da;
+  margin: 0 0 16px;
+}
+
+.body:last-child {
+  margin-bottom: 0;
+}
+
+.list {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.list:last-child {
+  margin-bottom: 0;
+}
+
+.list li {
+  position: relative;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #c7d0da;
+  padding-left: 22px;
+  margin-bottom: 10px;
+}
+
+.list li:last-child {
+  margin-bottom: 0;
+}
+
+.list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #00c9a7;
+}
+
+.inlineLink {
+  color: #00c9a7;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.inlineLink:hover {
+  color: #2dd4bf;
+}
+
+/* ── Footer (matches home.module.css's footer) ──
+   Centered/stacked rather than a left-brand / right-links split: the
+   far-right corner of the page is where the persistent Emily chat
+   widget lives (position: fixed, injected by third-party script), and a
+   right-aligned footer link ends up sitting under it. Centering avoids
+   that corner entirely instead of trying to carve out clearance for a
+   third-party widget whose exact footprint we don't control. */
+
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.footerBrand { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: #fff; }
+.footerTag { font-size: 12px; color: #a0aab8; margin-top: 4px; }
+.footerCopy { font-size: 12px; color: #a0aab8; }
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footerLink {
+  font-size: 12px;
+  color: #a0aab8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footerLink:hover {
+  color: #00c9a7;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 110px 20px 80px;
+  }
+  .tocList {
+    grid-template-columns: 1fr;
+  }
+  .toc {
+    padding: 24px 20px;
+  }
+  .footer {
+    padding: 32px 24px;
+  }
+  .footerRight {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

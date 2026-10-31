@@ -1,0 +1,32 @@
+/* Small layout pieces shared by the inner marketing pages. */
+.steps { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.stepLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 15px;
+}
+.stepLink:hover { border-color: var(--accent); }
+.stepLink b { color: var(--accent); font-weight: 700; margin-right: 4px; }
+.stepNum { font-size: 12px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cardFoot { margin-top: 16px; }
+.afterBadge { margin-top: 18px; }
+.ruleLine { margin-top: 18px; }
+.prose h2 { font-size: 22px; font-weight: 700; color: var(--ink); margin: 40px 0 12px; }
+.prose p, .prose li { color: var(--muted); line-height: 1.75; font-size: 16px; }
+.prose ul { padding-left: 20px; }
+.prose a { color: var(--accent); }
+.stepGrid { list-style: none; padding: 0; margin: 28px 0 0; }
+.stepNumBig { display: block; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+.planGrid { margin-top: 28px; }
+.planLabel { margin: 20px 0 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+.seoBox { margin-top: 16px; }
+.centerIntro { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+.centerIntro > * { margin-left: auto; margin-right: auto; }
+.faqHead { margin-top: 56px; }

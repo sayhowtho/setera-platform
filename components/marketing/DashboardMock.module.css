@@ -1,0 +1,70 @@
+.frame {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  box-shadow: 0 24px 60px rgba(8, 10, 15, 0.12);
+  min-width: 0;
+}
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px 12px;
+  padding: 12px 14px;
+}
+.title { font-size: 14px; font-weight: 700; color: var(--ink); }
+.sample {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+.rows { list-style: none; margin: 0; padding: 0; }
+.row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  grid-template-areas: 'time who tag' 'time outcome outcome';
+  gap: 2px 12px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+.time { grid-area: time; color: var(--muted); font-variant-numeric: tabular-nums; }
+.who { grid-area: who; display: flex; flex-direction: column; min-width: 0; }
+.who strong { color: var(--ink); font-weight: 650; }
+.who span { color: var(--muted); }
+.outcome { grid-area: outcome; color: var(--muted); font-size: 13px; }
+.tagUrgent, .tagOpp, .tagNeutral {
+  grid-area: tag;
+  align-self: start;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.tagUrgent { background: var(--urgent-bg); color: var(--urgent); }
+.tagOpp { background: var(--tint); color: var(--accent); }
+.tagNeutral { border: 1px solid var(--border); color: var(--muted); }
+.pipeline { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px; border-top: 1px solid var(--border); }
+.stage, .stageActive {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.stageActive { background: var(--btn-bg); color: var(--btn-ink); border-color: transparent; }
+.caption { padding: 4px 14px 12px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+
+@media (max-width: 480px) {
+  .row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'who tag' 'time time' 'outcome outcome'; }
+}

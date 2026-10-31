@@ -1,0 +1,91 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+  font-size: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #151a22 #080a0f;
+  background-color: #080a0f; /* matches body — see note below */
+}
+
+/* Site-wide dark background, not near-white (#f8faf8, the old value).
+   This is a deliberate cosmetic workaround, not a fix for the underlying
+   cause: on notched iPhones in landscape, missing viewport-fit=cover
+   safe-area handling can leave a margin where the page doesn't render,
+   and the browser fills that margin with this background color. #f8faf8
+   made that margin show up as a visible white/light stripe; matching the
+   dark theme makes it blend in instead, on this page and every other
+   route, since this file is loaded globally. This is a cosmetic
+   workaround: it hides the margin rather than solving the safe-area
+   behavior itself. #080a0f is the same base color already used as .root's
+   background in app/home.module.css and as the scrollbar-color track
+   above — not an approximation, the actual canonical dark background
+   color used throughout the design. */
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #080a0f;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #080a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #151a22;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1e2531;
+}
+
+* {
+  transition: box-shadow 0.2s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.card-hover:hover {
+  box-shadow: 0 8px 25px rgba(26, 58, 42, 0.12) !important;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background-color: #1a3a2a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: #2d5a3d;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}

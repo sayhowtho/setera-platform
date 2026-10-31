@@ -1,0 +1,22 @@
+.ring { transform-origin: center; }
+.callMeta { margin: -2px 0 10px; font-size: 13px; color: var(--muted); }
+.sample {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+.tick { color: var(--accent); vertical-align: -1px; }
+.board { display: grid; gap: 8px; margin-top: 6px; }
+.boardHead { margin: 0; }
+/* Placeholder rows for "existing" pipeline entries: no text, purely visual. */
+.ghostRow {
+  height: 44px;
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+  background: var(--bg);
+  opacity: 0.7;
+}
